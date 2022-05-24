@@ -5,13 +5,12 @@ import { ThreeDots } from 'react-loader-spinner';
 import { LoginScreen } from "./style"
 import Logo from "./../../assets/Group 8.svg"
 
-export default function Login(props) {
+export default function Login({setUserData}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
-    const { saveToken, saveImage } = props;
 
     function login(event) {
         event.preventDefault();
@@ -23,8 +22,7 @@ export default function Login(props) {
         });
         request.then(response => {
             const { data } = response;
-            saveToken(data.token);
-            saveImage(data.image);
+            setUserData(data);
             navigate("/hoje");
         })
         request.catch(err => {

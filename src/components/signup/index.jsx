@@ -25,7 +25,7 @@ export default function SignUp() {
             password
         });
         request.then(response => {
-            const { data } = response;
+            /* const { data } = response; */
             navigate("/");
             alert('Cadastrado com sucesso!');
         });
