@@ -6,6 +6,8 @@ import dayjs from "dayjs";
 import Login from "./components/login";
 import SignUp from "./components/signup";
 import TodayScreen from "./components/todayScreen";
+import HabitsScreen from "./components/habitsScreen";
+import StoryScreen from "./components/historyScreen";
 
 import UserContext from './context/UserContext';
 
@@ -23,6 +25,8 @@ function App() {
                     <Route path="/" element={<Login setUserData={setUserData}/>} />
                     <Route path="/cadastro" element={<SignUp />} />
                     <Route path="/hoje" element={<TodayScreen day={now} userData={userData}/>} />
+                    <Route path="/habitos" element={<HabitsScreen userData={userData}/>} />
+                    <Route path="/historico" element={<StoryScreen userData={userData}/>} /> 
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>

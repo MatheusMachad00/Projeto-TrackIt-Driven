@@ -5,6 +5,7 @@ import Checkmark from "./../../assets/check.svg"
 import dayjs from "dayjs";
 
 import Header from "../header"
+import Footer from "../footer";
 
 export default function TodayScreen({ userData, day }) {
 
@@ -23,8 +24,6 @@ export default function TodayScreen({ userData, day }) {
         const request = axios.get(LINK_API, config);
         request.then(response => {
             const { data } = response;
-
-            console.log(data);
         });
         request.catch(err => console.log(err.response));
     }, []);
@@ -37,7 +36,7 @@ export default function TodayScreen({ userData, day }) {
                 <div>{capitalizeFirstLetter(day)}</div>
                 <p>Nenhum hábito concluído ainda</p>
             </DayBlock>
-
+        <Footer />
         </>
     )
 }
