@@ -5,7 +5,7 @@ import { TodayHabit, HabitDays, WeekdaysBox, Trashcan } from "./style"
 import Trash from './../../assets/Group.svg'
 
 
-export default function Habit({ habits, userData }) {
+export default function Habit({ habits, dataStorage }) {
 
     function weekdaysViewer({ days }) {
         const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
@@ -22,14 +22,18 @@ export default function Habit({ habits, userData }) {
     function deleteHabit(id) {
         const config = {
             headers: {
-                Authorization: `Bearer ${userData.token}`
+                Authorization: `Bearer ${dataStorage.token}`
             }
         };
-        axios
-            .delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config)
-            .then(() => {
-                alert("Hábito deletado!");
-            });
+
+        if(window.confirm('Você tem certeza que quer excluir esse hábito?')){
+            axios
+                .delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`, config)
+                .then(() => {
+                    alert("Hábito deletado!");
+                    window.location.reload()
+                });
+        }
     }
 
     if (habits === false) {

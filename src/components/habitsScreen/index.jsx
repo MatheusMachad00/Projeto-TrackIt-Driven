@@ -13,11 +13,13 @@ export default function HabitsScreen({ userData }) {
     const [habits, setHabits] = useState(false);
     const [newMenu, setNewMenu] = useState(false);
 
+    const dataLocalStorage = localStorage.getItem("userDataStorage")
+    const dataStorage = JSON.parse(dataLocalStorage)
 
     useEffect(() => {
         const config = {
             headers: {
-                Authorization: `Bearer ${userData.token}`
+                Authorization: `Bearer ${dataStorage.token}`
             }
         };
 
@@ -26,6 +28,7 @@ export default function HabitsScreen({ userData }) {
         request.then(response => {
             const { data } = response;
             setHabits(data);
+            console.log(data)
         });
         request.catch(err => console.log(err.response));
     }, []);
@@ -37,7 +40,7 @@ export default function HabitsScreen({ userData }) {
 
     return (
         <>
-            <Header userData={userData} />
+            <Header userData={dataStorage} />
             <div>
                 <Subtitle>
                     <p>Meus hábitos</p>
@@ -46,7 +49,7 @@ export default function HabitsScreen({ userData }) {
 
                 {!newMenu ? <></> :
                     <NewHabit
-                        userData={userData}
+                    dataStorage={dataStorage}
                         setHabits={setHabits}
                         habits={habits}
                         closeMenu={(newMenu) => setNewMenu(newMenu)} />}
@@ -54,7 +57,7 @@ export default function HabitsScreen({ userData }) {
                 {habits === [] ?
                     <EmptyHabits>Você não tem nenhum hábito cadastrado ainda.
                         Adicione um hábito para começar a trackear!</EmptyHabits> :
-                    <Habit userData={userData} habits={habits} />}
+                    <Habit dataStorage={dataStorage} habits={habits} />}
             </div>
             <Footer />
         </>

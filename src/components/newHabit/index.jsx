@@ -1,22 +1,23 @@
 import { useState } from "react";
-import { NewHabitsBlock, BottomRight, CancelButton } from "./style"
 import axios from "axios";
+import { ThreeDots } from 'react-loader-spinner';
+import { NewHabitsBlock, BottomRight, CancelButton } from "./style"
 
-export default function NewHabit({closeMenu, userData, setHabits, habits}) {
+export default function NewHabit({closeMenu, dataStorage, setHabits, habits}) {
     const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
     const [weekdayId, setWeekdayId] = useState([]);
     const [habit, setHabit] = useState("");
-    const [newHabitData, setNewHabitData] = useState(false);
+    const [loading, setLoading] = useState(false);
 
 
 
     function saveNewHabit(event) {
         event.preventDefault();
-        closeMenu();
+        setLoading(true);
         setHabits([...habits, ])
         const config = {
             headers: {
-                Authorization: `Bearer ${userData.token}`
+                Authorization: `Bearer ${dataStorage.token}`
             }
         };
         const LINK_API = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits"
@@ -24,17 +25,11 @@ export default function NewHabit({closeMenu, userData, setHabits, habits}) {
         request.then((response) => {
             const { data } = response;
             console.log("tudo ok", response)
-            setNewHabitData(data.data)
-            /* console.log(newHabitData) */
-            /* setHabits([...habits, ]) */
+            closeMenu();
+            window.location.reload()
         });
         request.catch(err => console.log(err.response))
-
     }
-
-    /* console.log(weekdayId); */
-
-
 
     function generateArray(day) {
         if (weekdayId.includes(day)) {
@@ -53,6 +48,8 @@ export default function NewHabit({closeMenu, userData, setHabits, habits}) {
                         type="text"
                         placeholder="nome do hábito"
                         value={habit}
+                        required
+                        disabled={loading ? true : false}
                         onChange={(e) => setHabit(e.target.value)} />
                     <div>
                         {weekdays.map((weekday, index) =>
@@ -60,11 +57,19 @@ export default function NewHabit({closeMenu, userData, setHabits, habits}) {
                             className={weekdayId.includes(index) ? "selected" : ""}
                             key={index}
                             type="button"
+                            required
+                            disabled={loading ? true : false}
                             onClick={() => { generateArray(index) }}>{weekday}</button>))}
                     </div>
                     <BottomRight>
                         <CancelButton onClick={() => closeMenu()}>Cancelar</CancelButton>
-                        <button type="submit" className="save">Salvar</button>
+                        <button type="submit" className="save">
+                        {loading ? (
+                            <ThreeDots color="#FFFFFF" height={13} align='center' />
+                        ) : (
+                            'Salvar'
+                        )}
+                        </button>
                     </BottomRight>
                 </form>
             </NewHabitsBlock>
