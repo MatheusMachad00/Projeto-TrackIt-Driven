@@ -55,3 +55,11 @@ position: relative;
 right: -315px;
 top: -75px;
 `
+
+export const Loading = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+margin-top: 50%;
+`

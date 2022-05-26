@@ -7,7 +7,7 @@ import dayjs from "dayjs";
 import Header from "../header"
 import Footer from "../footer";
 
-export default function TodayScreen({ userData, day }) {
+export default function TodayScreen({ dataStorage, day }) {
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -16,7 +16,7 @@ export default function TodayScreen({ userData, day }) {
     useEffect(() => {
         const config = {
             headers: {
-                Authorization: `Bearer ${userData.token}`
+                Authorization: `Bearer ${dataStorage.token}`
             }
         };
 
@@ -31,7 +31,7 @@ export default function TodayScreen({ userData, day }) {
 
     return (
         <>
-            <Header userData={userData} />
+            <Header dataStorage={dataStorage} />
             <DayBlock>
                 <div>{capitalizeFirstLetter(day)}</div>
                 <p>Nenhum hábito concluído ainda</p>

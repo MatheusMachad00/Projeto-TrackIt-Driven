@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
-import { TodayHabit, HabitDays, WeekdaysBox, Trashcan } from "./style"
+import { ThreeDots } from 'react-loader-spinner';
+import { TodayHabit, HabitDays, WeekdaysBox, Trashcan, Loading } from "./style"
 
 import Trash from './../../assets/Group.svg'
 
@@ -37,7 +38,7 @@ export default function Habit({ habits, dataStorage }) {
     }
 
     if (habits === false) {
-        return (<p>Carregando...</p>)
+        return (<Loading><ThreeDots color="#136BA5" height={50} align='center' /></Loading>)
     } else {
         return (
             <>

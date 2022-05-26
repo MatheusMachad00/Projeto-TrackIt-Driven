@@ -9,12 +9,10 @@ import NewHabit from "../newHabit";
 import Footer from "../footer";
 import Habit from "../habit";
 
-export default function HabitsScreen({ userData }) {
+export default function HabitsScreen({dataStorage}) {
     const [habits, setHabits] = useState(false);
     const [newMenu, setNewMenu] = useState(false);
 
-    const dataLocalStorage = localStorage.getItem("userDataStorage")
-    const dataStorage = JSON.parse(dataLocalStorage)
 
     useEffect(() => {
         const config = {
@@ -40,7 +38,7 @@ export default function HabitsScreen({ userData }) {
 
     return (
         <>
-            <Header userData={dataStorage} />
+            <Header dataStorage={dataStorage} />
             <div>
                 <Subtitle>
                     <p>Meus hábitos</p>

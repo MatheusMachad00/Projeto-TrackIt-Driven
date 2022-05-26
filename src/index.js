@@ -14,6 +14,8 @@ import UserContext from './context/UserContext';
 function App() {
     const [userData, setUserData] = useState({});
 
+    const dataLocalStorage = localStorage.getItem("userDataStorage")
+    const dataStorage = JSON.parse(dataLocalStorage)
 
     const dayjs = require('dayjs');
     require('dayjs/locale/pt-br');
@@ -25,9 +27,9 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Login setUserData={setUserData}/>} />
                     <Route path="/cadastro" element={<SignUp />} />
-                    <Route path="/hoje" element={<TodayScreen day={now} userData={userData}/>} />
-                    <Route path="/habitos" element={<HabitsScreen userData={userData}/>} />
-                    <Route path="/historico" element={<StoryScreen userData={userData}/>} /> 
+                    <Route path="/hoje" element={<TodayScreen day={now} dataStorage={dataStorage}/>} />
+                    <Route path="/habitos" element={<HabitsScreen dataStorage={dataStorage}/>} />
+                    <Route path="/historico" element={<StoryScreen dataStorage={dataStorage}/>} /> 
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>

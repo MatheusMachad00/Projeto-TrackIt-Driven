@@ -1,10 +1,10 @@
 import {Head} from "./style"
 
-export default function Header({userData}){
+export default function Header({dataStorage}){
     return(
         <Head>
             <p>TrackIt</p>
-            <img src={userData.image} alt="profile photo" />
+            <img src={dataStorage.image} alt="profile photo" />
         </Head>
     );
 }
