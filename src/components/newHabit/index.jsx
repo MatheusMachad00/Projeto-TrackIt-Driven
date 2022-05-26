@@ -25,7 +25,7 @@ export default function NewHabit({closeMenu, userData, setHabits, habits}) {
             const { data } = response;
             console.log("tudo ok", response)
             setNewHabitData(data.data)
-            console.log(newHabitData)
+            /* console.log(newHabitData) */
             /* setHabits([...habits, ]) */
         });
         request.catch(err => console.log(err.response))

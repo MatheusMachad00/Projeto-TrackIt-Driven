@@ -11,8 +11,7 @@ export const FooterContainer = styled.div`
     bottom: 0;
     padding: 0 30px;
     background-color: #fff;
-    /* z-index: 1; */
-    
+
     p {
         font-family: 'Lexend Deca';
         font-size: 18px;

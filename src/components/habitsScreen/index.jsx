@@ -7,10 +7,12 @@ import { Subtitle, EmptyHabits, MainChunk, TodayHabit, HabitDays, WeekdaysBox } 
 import Header from "./../header/index";
 import NewHabit from "../newHabit";
 import Footer from "../footer";
+import Habit from "../habit";
 
 export default function HabitsScreen({ userData }) {
-    const [habits, setHabits] = useState([]);
+    const [habits, setHabits] = useState(false);
     const [newMenu, setNewMenu] = useState(false);
+
 
     useEffect(() => {
         const config = {
@@ -24,8 +26,11 @@ export default function HabitsScreen({ userData }) {
         request.then(response => {
             const { data } = response;
             setHabits(data);
-            console.log(data);
-
+            console.log(data)
+            /* console.log(data)
+            console.log(habits)
+            console.log(data[0])
+            console.log(data[0].days) */
         });
         request.catch(err => console.log(err.response));
     }, []);
@@ -35,47 +40,27 @@ export default function HabitsScreen({ userData }) {
         if (!newMenu) setNewMenu(true);
     }
 
-    function weekdaysViewer({ days }) {
-        const weekdays = ["D", "S", "T", "Q", "Q", "S", "S"];
-        return (
-            <WeekdaysBox>
-                {weekdays.map((weekday, index) =>
-                    (<HabitDays key={index}>{weekday}</HabitDays>))}
-            </WeekdaysBox>
-        );
-    }
-
-
     return (
         <>
             <Header userData={userData} />
-            <Subtitle>
-                <p>Meus hábitos</p>
-                <button onClick={() => openNewHabit()}>+</button>
-            </Subtitle>
-            
-            {!newMenu ? <></> :
-                <NewHabit 
-                userData={userData}
-                setHabits={setHabits}
-                habits={habits} 
-                closeMenu={(newMenu) => setNewMenu(newMenu)} />}
+            <div>
+                <Subtitle>
+                    <p>Meus hábitos</p>
+                    <button onClick={() => openNewHabit()}>+</button>
+                </Subtitle>
 
-            {habits === [] ?
-                <EmptyHabits>Você não tem nenhum hábito cadastrado ainda.
-                    Adicione um hábito para começar a trackear!</EmptyHabits> :
-                habits.map(({ id, name, days }) => (
-                    <TodayHabit key={id}>
-                        <p>{name}</p>
-                        <div selected={days.includes(id)}>{weekdaysViewer({ days })}</div>
-                    </TodayHabit>
-                ))}
-            {/* {habits.map(({ id, name, days }) => (
-                        <TodayHabit key={id}>
-                            <p>{name}</p>
-                            <div selected={days.includes(id)}>{weekdaysViewer({ days })}</div>
-                        </TodayHabit>
-                ))} */}
+                {!newMenu ? <></> :
+                    <NewHabit
+                        userData={userData}
+                        setHabits={setHabits}
+                        habits={habits}
+                        closeMenu={(newMenu) => setNewMenu(newMenu)} />}
+
+                {habits === [] ?
+                    <EmptyHabits>Você não tem nenhum hábito cadastrado ainda.
+                        Adicione um hábito para começar a trackear!</EmptyHabits> :
+                    <Habit habits={habits} />}
+            </div>
             <Footer />
         </>
     );

@@ -12,6 +12,8 @@ align-items: center;
 padding-bottom: 18px;
 position: absolute;
 /* background-color: rebeccapurple; */
+z-index: 300;
+
 input{
     width: 303px;
     height: 45px;

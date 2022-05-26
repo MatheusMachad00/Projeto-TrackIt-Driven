@@ -14,6 +14,7 @@ import UserContext from './context/UserContext';
 function App() {
     const [userData, setUserData] = useState({});
 
+
     const dayjs = require('dayjs');
     require('dayjs/locale/pt-br');
     let now = dayjs().locale('pt-br').format("dddd, DD/MM");
