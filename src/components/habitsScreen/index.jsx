@@ -26,11 +26,6 @@ export default function HabitsScreen({ userData }) {
         request.then(response => {
             const { data } = response;
             setHabits(data);
-            console.log(data)
-            /* console.log(data)
-            console.log(habits)
-            console.log(data[0])
-            console.log(data[0].days) */
         });
         request.catch(err => console.log(err.response));
     }, []);
@@ -59,7 +54,7 @@ export default function HabitsScreen({ userData }) {
                 {habits === [] ?
                     <EmptyHabits>Você não tem nenhum hábito cadastrado ainda.
                         Adicione um hábito para começar a trackear!</EmptyHabits> :
-                    <Habit habits={habits} />}
+                    <Habit userData={userData} habits={habits} />}
             </div>
             <Footer />
         </>
