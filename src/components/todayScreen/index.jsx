@@ -48,7 +48,9 @@ export default function TodayScreen({ dataStorage, day }) {
                         highestSequence={highestSequence}
                         done={done}
                         name={name}
-                        id={id} />))}
+                        index={index}
+                        id={id}
+                        dataStorage={dataStorage} />))}
             </TaskBlock>
             <Footer />
         </MainChunk>

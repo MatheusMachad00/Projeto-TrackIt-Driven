@@ -36,7 +36,7 @@ export const DivImg = styled.div`
     background-color: #E7E7E7; 
     /* margin-left: 50px; */
     border-radius: 5px;
-    /* background: ${(props) => (props.selected ? "#8FC549" : "#E7E7E7")}; */
+    background: ${props => (props.isfinished ? "#8FC549" : "#E7E7E7")};
 
 img{
     width: 35px;
