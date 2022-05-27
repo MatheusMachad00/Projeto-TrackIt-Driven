@@ -1,8 +1,7 @@
 import styled from 'styled-components'
 
 export const MainChunk = styled.div`
-/* background-color: #F2F2F2; */
-/* background-color: yellow; */
+background-color: #F2F2F2;
 `
 
 export const Subtitle = styled.div`
@@ -12,6 +11,7 @@ align-items: center;
 text-align: center;
 padding: 22px 22px;
 background-color: #F2F2F2;
+
 p{
     font-family: 'Lexend Deca';
     font-style: normal;
@@ -19,6 +19,7 @@ p{
     font-size: 22.976px;
     color: #126BA5;
 }
+
 button{
     font-family: 'Lexend Deca';
     font-style: normal;

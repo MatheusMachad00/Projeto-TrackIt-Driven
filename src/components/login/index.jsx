@@ -11,6 +11,7 @@ export default function Login({setUserData}) {
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
+    /* localStorage.clear() */
 
     function login(event) {
         event.preventDefault();
@@ -24,6 +25,7 @@ export default function Login({setUserData}) {
             const { data } = response;
             setUserData(data);
             console.log(data)
+            /* localStorage.clear() */
             const stringifyData = JSON.stringify(data);
             localStorage.setItem("userDataStorage", stringifyData);
             navigate("/hoje");

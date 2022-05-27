@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useEffect, useState, Fragment } from "react";
 import axios from "axios";
-import { Subtitle, EmptyHabits, MainChunk, TodayHabit, HabitDays, WeekdaysBox } from "./style"
+import { Subtitle, EmptyHabits, MainChunk } from "./style"
 
 
 import Header from "./../header/index";
@@ -26,7 +26,6 @@ export default function HabitsScreen({dataStorage}) {
         request.then(response => {
             const { data } = response;
             setHabits(data);
-            console.log(data)
         });
         request.catch(err => console.log(err.response));
     }, []);
@@ -39,7 +38,7 @@ export default function HabitsScreen({dataStorage}) {
     return (
         <>
             <Header dataStorage={dataStorage} />
-            <div>
+            <MainChunk>
                 <Subtitle>
                     <p>Meus hábitos</p>
                     <button onClick={() => openNewHabit()}>+</button>
@@ -56,7 +55,7 @@ export default function HabitsScreen({dataStorage}) {
                     <EmptyHabits>Você não tem nenhum hábito cadastrado ainda.
                         Adicione um hábito para começar a trackear!</EmptyHabits> :
                     <Habit dataStorage={dataStorage} habits={habits} />}
-            </div>
+            </MainChunk>
             <Footer />
         </>
     );
