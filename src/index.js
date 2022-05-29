@@ -31,8 +31,14 @@ function App() {
                     day={now} 
                     dataStorage={dataStorage}
                     userData={userData}/>} />
-                    <Route path="/habitos" element={<HabitsScreen dataStorage={dataStorage}/>} />
-                    <Route path="/historico" element={<StoryScreen dataStorage={dataStorage}/>} /> 
+
+                    <Route path="/habitos" element={<HabitsScreen 
+                    dataStorage={dataStorage}
+                    userData={userData}/>} />
+
+                    <Route path="/historico" element={<StoryScreen 
+                    dataStorage={dataStorage}
+                    userData={userData}/>} /> 
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>

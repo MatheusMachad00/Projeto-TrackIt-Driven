@@ -9,16 +9,24 @@ import NewHabit from "../newHabit";
 import Footer from "../footer";
 import Habit from "../habit";
 
-export default function HabitsScreen({dataStorage}) {
+export default function HabitsScreen({dataStorage, userData}) {
     const [habits, setHabits] = useState(false);
     const [newMenu, setNewMenu] = useState(false);
 
 
 
     useEffect(() => {
+
+        let TOKEN;
+        if (dataStorage === null) {
+            TOKEN = userData.token;
+        } else {
+            TOKEN = dataStorage.token;
+        }
+
         const config = {
             headers: {
-                Authorization: `Bearer ${dataStorage.token}`
+                Authorization: `Bearer ${TOKEN}`
             }
         };
 
@@ -40,7 +48,7 @@ export default function HabitsScreen({dataStorage}) {
 
     return (
         <>
-            <Header dataStorage={dataStorage} />
+            <Header dataStorage={dataStorage} userData={userData}/>
             <MainChunk>
                 <Subtitle>
                     <p>Meus hábitos</p>

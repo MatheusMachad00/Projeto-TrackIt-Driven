@@ -21,6 +21,7 @@ export default function Login({setUserData}) {
         });
         request.then(response => {
             const { data } = response;
+            window.localStorage.clear();
             setUserData(data);
             console.log(data)
             const stringifyData = JSON.stringify(data);
