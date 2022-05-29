@@ -1,23 +1,33 @@
 import { useEffect, useState, Fragment } from "react";
 import axios from "axios";
-import { DayBlock, TaskBlock, MainChunk } from "./style";
+import { DayBlock, TaskBlock, MainChunk, TaskCompleted } from "./style";
 
 
 import Task from "../task";
 import Header from "../header";
 import Footer from "../footer";
 
-export default function TodayScreen({ dataStorage, day }) {
+export default function TodayScreen({ dataStorage, day, userData }) {
     const [todayTasks, setTodayTasks] = useState(false);
+    const [count, setCount] = useState(0);
+
+    let tasksCompleted = ((count / todayTasks.length) * 100).toFixed(0);
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
     }
 
     useEffect(() => {
+        let TOKEN;
+        if (dataStorage === null) {
+            TOKEN = userData.token;
+        } else {
+            TOKEN = dataStorage.token;
+        }
+
         const config = {
             headers: {
-                Authorization: `Bearer ${dataStorage.token}`
+                Authorization: `Bearer ${TOKEN}`
             }
         };
 
@@ -26,31 +36,36 @@ export default function TodayScreen({ dataStorage, day }) {
         request.then(response => {
             const { data } = response;
             setTodayTasks(data)
-            /* console.log(todayTasks)
-            console.log(data) */
+            console.log(data)
         });
-        request.catch(err => console.log(err.response));
+        request.catch(err => {
+            window.location.reload()
+            console.log(err.response)
+        });
     }, []);
 
 
     return (
         <MainChunk>
-            <Header dataStorage={dataStorage} />
+            <Header dataStorage={dataStorage} userData={userData} />
             <DayBlock>
                 <div>{capitalizeFirstLetter(day)}</div>
-                <p>Nenhum hábito concluído ainda</p>
+                {count > 0 ? <p className="completed">{tasksCompleted}% dos hábitos concluídos</p>
+                    : <p>Nenhum hábito concluído ainda</p>}
             </DayBlock>
             <TaskBlock>
                 {!todayTasks ? 'Carregando...' :
                     todayTasks.map(({ currentSequence, highestSequence, done, name, id }, index) =>
-                    (<Task 
+                    (<Task
                         currentSequence={currentSequence}
                         highestSequence={highestSequence}
                         done={done}
                         name={name}
                         index={index}
                         id={id}
-                        dataStorage={dataStorage} />))}
+                        dataStorage={dataStorage}
+                        setCount={setCount}
+                        count={count} />))}
             </TaskBlock>
             <Footer />
         </MainChunk>

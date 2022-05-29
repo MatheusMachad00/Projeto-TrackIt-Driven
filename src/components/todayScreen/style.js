@@ -22,6 +22,10 @@ p{
     color: #BABABA;
     margin-top: 5px;
 }
+
+.completed{
+    color: #8FC549;
+}
 `
 
 export const TaskBlock = styled.div`
@@ -54,4 +58,13 @@ h3{
     line-height: 16px;
     color: #666666;
 }
+`
+
+export const TaskCompleted = styled.span`
+    font-family: 'Lexend Deca';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 17.976px;
+    margin-top: 10px;
+    color: #8FC549;
 `

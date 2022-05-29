@@ -27,7 +27,10 @@ function App() {
                 <Routes>
                     <Route path="/" element={<Login setUserData={setUserData}/>} />
                     <Route path="/cadastro" element={<SignUp />} />
-                    <Route path="/hoje" element={<TodayScreen day={now} dataStorage={dataStorage}/>} />
+                    <Route path="/hoje" element={<TodayScreen 
+                    day={now} 
+                    dataStorage={dataStorage}
+                    userData={userData}/>} />
                     <Route path="/habitos" element={<HabitsScreen dataStorage={dataStorage}/>} />
                     <Route path="/historico" element={<StoryScreen dataStorage={dataStorage}/>} /> 
                 </Routes>

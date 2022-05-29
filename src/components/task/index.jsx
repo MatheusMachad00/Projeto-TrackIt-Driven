@@ -3,22 +3,35 @@ import axios from "axios";
 import { TodayTask, DivImg, TaskData, Highscore } from "./style"
 import Checkmark from "./../../assets/check.svg"
 
-export default function Task({ name, id, currentSequence, highestSequence, done, index, dataStorage }) {
+export default function Task(props) {
+    const { 
+        name,
+        id,
+        currentSequence,
+        highestSequence,
+        done,
+        index,
+        dataStorage,
+        setCount,
+        count } = props
+
     const [habitDone, setHabitDone] = useState([]);
 
 
     function habitChecked(habit, id) {
         if (habitDone.includes(habit)) {
             setHabitDone([...habitDone.filter((h) => h !== habit)]);
+            setCount(count-1);
             return;
         }
         setHabitDone([...habitDone, habit]);
         completeHabit(id);
         console.log(id)
+        setCount(count+1);
     }
 
     function completeHabit(id) {
-        const config = {
+        /* const config = {
             headers: {
                 Authorization: `Bearer ${dataStorage.token}`
             }
@@ -30,7 +43,7 @@ export default function Task({ name, id, currentSequence, highestSequence, done,
             const { data } = response;
             console.log("tudo ok", response)
         });
-        request.catch(err => console.log(err.response))
+        request.catch(err => console.log(err.response)) */
     }
 
 
