@@ -1,8 +1,12 @@
+import { useEffect } from "react";
+
 import Header from "../header";
 import Footer from "../footer";
 import { Subtitle, Record} from "./style"
 
 export default function StoryScreen({dataStorage}){
+
+
     return(
         <>
         <Header dataStorage={dataStorage} />

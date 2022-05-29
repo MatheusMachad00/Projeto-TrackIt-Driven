@@ -6,6 +6,7 @@ import Checkmark from "./../../assets/check.svg"
 export default function Task({ name, id, currentSequence, highestSequence, done, index, dataStorage }) {
     const [habitDone, setHabitDone] = useState([]);
 
+
     function habitChecked(habit, id) {
         if (habitDone.includes(habit)) {
             setHabitDone([...habitDone.filter((h) => h !== habit)]);
@@ -15,20 +16,23 @@ export default function Task({ name, id, currentSequence, highestSequence, done,
         completeHabit(id);
         console.log(id)
     }
-console.log(dataStorage.token)
+
     function completeHabit(id) {
         const config = {
             headers: {
                 Authorization: `Bearer ${dataStorage.token}`
             }
         };
-        const request = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`, config);
+
+        const LINK_API = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`
+        const request = axios.get(LINK_API, {}, config);
         request.then((response) => {
             const { data } = response;
             console.log("tudo ok", response)
         });
         request.catch(err => console.log(err.response))
     }
+
 
     const cond = highestSequence === currentSequence && highestSequence > 0;
 

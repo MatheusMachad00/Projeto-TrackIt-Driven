@@ -14,12 +14,15 @@ export default function HabitsScreen({dataStorage}) {
     const [newMenu, setNewMenu] = useState(false);
 
 
+
     useEffect(() => {
         const config = {
             headers: {
                 Authorization: `Bearer ${dataStorage.token}`
             }
         };
+
+        
 
         const LINK_API = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
         const request = axios.get(LINK_API, config);
