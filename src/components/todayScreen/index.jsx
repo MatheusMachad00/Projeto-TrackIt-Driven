@@ -1,17 +1,19 @@
 import { useEffect, useState, Fragment } from "react";
 import axios from "axios";
-import { DayBlock, TaskBlock, MainChunk, TaskCompleted } from "./style";
+import { ThreeDots } from 'react-loader-spinner';
+import { DayBlock, TaskBlock, MainChunk, TaskCompleted, Loading } from "./style";
 
 
 import Task from "../task";
 import Header from "../header";
 import Footer from "../footer";
 
-export default function TodayScreen({ dataStorage, day, userData }) {
+export default function TodayScreen({ dataStorage, day, userData, setProgress, progress }) {
     const [todayTasks, setTodayTasks] = useState(false);
     const [count, setCount] = useState(0);
 
     let tasksCompleted = ((count / todayTasks.length) * 100).toFixed(0);
+    setProgress(((count / todayTasks.length) * 100).toFixed(0));
 
     function capitalizeFirstLetter(string) {
         return string.charAt(0).toUpperCase() + string.slice(1);
@@ -54,7 +56,8 @@ export default function TodayScreen({ dataStorage, day, userData }) {
                     : <p>Nenhum hábito concluído ainda</p>}
             </DayBlock>
             <TaskBlock>
-                {!todayTasks ? 'Carregando...' :
+                {!todayTasks ? 
+                <Loading><ThreeDots color="#136BA5" height={50} align='center' /></Loading> :
                     todayTasks.map(({ currentSequence, highestSequence, done, name, id }, index) =>
                     (<Task
                         currentSequence={currentSequence}
@@ -65,9 +68,11 @@ export default function TodayScreen({ dataStorage, day, userData }) {
                         id={id}
                         dataStorage={dataStorage}
                         setCount={setCount}
-                        count={count} />))}
+                        count={count} 
+                        userData={userData}
+                        />))}
             </TaskBlock>
-            <Footer />
+            <Footer progress={progress}/>
         </MainChunk>
     )
 }

@@ -4,7 +4,7 @@ import 'react-circular-progressbar/dist/styles.css';
 
 import { FooterContainer } from "./style"
 
-export default function Footer(){
+export default function Footer({progress}){
     const navigate = useNavigate();
 
     return(
@@ -15,6 +15,7 @@ export default function Footer(){
             <CircularProgressbar
                     onClick={() => navigate('/hoje')}
                     className="circularProgressbar"
+                    value={progress}
                     text={'Hoje'}
                     background={true}
                     backgroundPadding={6}

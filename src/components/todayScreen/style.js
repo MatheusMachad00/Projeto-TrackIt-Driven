@@ -68,3 +68,11 @@ export const TaskCompleted = styled.span`
     margin-top: 10px;
     color: #8FC549;
 `
+
+export const Loading = styled.div`
+display: flex;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+margin-top: 50%;
+`

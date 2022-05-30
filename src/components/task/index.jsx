@@ -13,7 +13,8 @@ export default function Task(props) {
         index,
         dataStorage,
         setCount,
-        count } = props
+        count,
+        userData } = props
 
     const [habitDone, setHabitDone] = useState([]);
 
@@ -31,9 +32,16 @@ export default function Task(props) {
     }
 
     function completeHabit(id) {
-        /* const config = {
+        /* let TOKEN;
+        if (dataStorage === null) {
+            TOKEN = userData.token;
+        } else {
+            TOKEN = dataStorage.token;
+        }
+
+        const config = {
             headers: {
-                Authorization: `Bearer ${dataStorage.token}`
+                Authorization: `Bearer ${TOKEN}`
             }
         };
 

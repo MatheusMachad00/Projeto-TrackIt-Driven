@@ -4,7 +4,7 @@ import Header from "../header";
 import Footer from "../footer";
 import { Subtitle, Record} from "./style"
 
-export default function StoryScreen({dataStorage, userData}){
+export default function StoryScreen({dataStorage, userData, progress}){
 
 
     return(
@@ -12,7 +12,7 @@ export default function StoryScreen({dataStorage, userData}){
         <Header dataStorage={dataStorage} userData={userData}/>
         <Subtitle>Histórico</Subtitle>
         <Record>Em breve você poderá ver o histórico dos seus hábitos aqui!</Record>
-        <Footer />
+        <Footer progress={progress}/>
         </>
     );
 }

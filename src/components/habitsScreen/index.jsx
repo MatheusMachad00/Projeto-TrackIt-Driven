@@ -9,7 +9,7 @@ import NewHabit from "../newHabit";
 import Footer from "../footer";
 import Habit from "../habit";
 
-export default function HabitsScreen({dataStorage, userData}) {
+export default function HabitsScreen({dataStorage, userData, progress}) {
     const [habits, setHabits] = useState(false);
     const [newMenu, setNewMenu] = useState(false);
 
@@ -67,7 +67,7 @@ export default function HabitsScreen({dataStorage, userData}) {
                         Adicione um hábito para começar a trackear!</EmptyHabits> :
                     <Habit dataStorage={dataStorage} habits={habits} />}
             </MainChunk>
-            <Footer />
+            <Footer progress={progress}/>
         </>
     );
 }

@@ -13,6 +13,7 @@ import UserContext from './context/UserContext';
 
 function App() {
     const [userData, setUserData] = useState({});
+    const [progress, setProgress] = useState()
 
     const dataLocalStorage = localStorage.getItem("userDataStorage")
     const dataStorage = JSON.parse(dataLocalStorage)
@@ -30,15 +31,19 @@ function App() {
                     <Route path="/hoje" element={<TodayScreen 
                     day={now} 
                     dataStorage={dataStorage}
-                    userData={userData}/>} />
+                    userData={userData}
+                    setProgress={setProgress}
+                    progress={progress}/>} />
 
                     <Route path="/habitos" element={<HabitsScreen 
                     dataStorage={dataStorage}
-                    userData={userData}/>} />
+                    userData={userData}
+                    progress={progress}/>} />
 
                     <Route path="/historico" element={<StoryScreen 
                     dataStorage={dataStorage}
-                    userData={userData}/>} /> 
+                    userData={userData}
+                    progress={progress}/>} /> 
                 </Routes>
             </BrowserRouter>
         </UserContext.Provider>
